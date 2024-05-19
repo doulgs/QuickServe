@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Button } from "../../../components/Button";
 import { Categories } from "../../../components/Categories";
 import { Header } from "../../../components/Header";
 import { Menu } from "../../../components/Menu";
+import { Commands_Modal } from "../../../components/Commands_Modal";
 import {
   CategoryContainer,
   Container,
@@ -11,6 +13,16 @@ import {
 } from "./styles";
 
 const Main: React.FC = () => {
+  const [selectedCommand, setselectedCommand] = useState("");
+  const [isCommandsModalVisble, setIsCommandsModalVisble] = useState(false);
+
+  function handleCommandsModalVisible() {
+    setIsCommandsModalVisble(!isCommandsModalVisble);
+  }
+
+  function handleSaveCommanda(command: string) {
+    setselectedCommand(command);
+  }
   return (
     <>
       <Container>
@@ -26,9 +38,17 @@ const Main: React.FC = () => {
       </Container>
       <Footer>
         <FooterContainer>
-          <Button onPress={() => {}}>Novo Pedido</Button>
+          {!selectedCommand && (
+            <Button onPress={handleCommandsModalVisible}>Novo Pedido</Button>
+          )}
         </FooterContainer>
       </Footer>
+
+      <Commands_Modal
+        visible={isCommandsModalVisble}
+        changeVisibleModal={handleCommandsModalVisible}
+        onSave={handleSaveCommanda}
+      />
     </>
   );
 };

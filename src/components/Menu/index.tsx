@@ -1,8 +1,15 @@
 import { FlatList } from "react-native";
-import { Product, ProductImage, ProductDetails, Separator } from "./styles";
+import {
+  Product,
+  ProductImage,
+  ProductDetails,
+  Separator,
+  ButtonAdd,
+} from "./styles";
 import { products } from "../../mocks/products";
 import { Text } from "../Texts";
 import { formatCurrency } from "../../utils/formatCurrency";
+import { PlusCircle } from "../Icons/PlusCircle";
 
 const Menu: React.FC = () => {
   return (
@@ -27,6 +34,9 @@ const Menu: React.FC = () => {
               {formatCurrency(product.price)}
             </Text>
           </ProductDetails>
+          <ButtonAdd>
+            <PlusCircle />
+          </ButtonAdd>
         </Product>
       )}
       ItemSeparatorComponent={Separator}
